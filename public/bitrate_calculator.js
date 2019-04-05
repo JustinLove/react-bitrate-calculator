@@ -20,6 +20,10 @@ resolutionOptions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
 
 var framerateOptions = [10, 15, 20, 30, 45, 60]
 
+var calculateBpp = function(state) {
+  return state.bitrate / (state.resolution.w * state.resolution.h) * state.framerate
+}
+
 export class BitrateCalculator extends React.Component {
   constructor(props) {
     super(props)
@@ -27,8 +31,8 @@ export class BitrateCalculator extends React.Component {
       bitrate: props.bitrate || 1200,
       resolution: props.resolution || resolutionOptions[0],
       framerate: props.framerate || 30,
-      bpp: 0.1,
     }
+    this.state.bpp = calculateBpp(this.state)
   }
 
   changedBitrate(e) {
@@ -38,7 +42,10 @@ export class BitrateCalculator extends React.Component {
     }
     var bitrate = parseInt(e.target.value, 10)
     if (!isNaN(bitrate)) {
-      this.setState({bitrate: bitrate})
+      this.setState((prevState) => {
+        prevState.bitrate = bitrate
+        return {bitrate: bitrate, bpp: calculateBpp(prevState)}
+      })
       return
     }
   }
@@ -46,7 +53,10 @@ export class BitrateCalculator extends React.Component {
   changedResolution(e) {
     var res = resolutionOptions.find(function(res) {return res.value == e.target.value})
     if (res) {
-      this.setState({resolution: res})
+      this.setState((prevState) => {
+        prevState.resolution = res
+        return {resolution: res, bpp: calculateBpp(prevState)}
+      })
     }
   }
 
@@ -57,13 +67,12 @@ export class BitrateCalculator extends React.Component {
     }
     var framerate = parseInt(e.target.value, 10)
     if (!isNaN(framerate)) {
-      this.setState({framerate: framerate})
+      this.setState((prevState) => {
+        prevState.framerate = framerate
+        return {framerate: framerate, bpp: calculateBpp(prevState)}
+      })
       return
     }
-  }
-
-  calculateBpp() {
-    return this.state.bitrate / (this.state.resolution.w * this.state.resolution.h) * this.state.framerate
   }
 
   render() {
@@ -113,7 +122,7 @@ export class BitrateCalculator extends React.Component {
               type: 'number',
               id: 'bpp',
               name: 'bpp',
-              value: this.calculateBpp(),
+              value: this.state.bpp,
               readOnly: true,
             }
           ),
