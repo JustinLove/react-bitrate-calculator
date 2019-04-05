@@ -44,9 +44,9 @@ export class BitrateCalculator extends React.Component {
   }
 
   changedResolution(e) {
-    var i = resolutionOptions.find(function(res) {res.value == e.target.value})
-    if (i >= 0) {
-      this.setState({resolution: resolutionOptions[i]})
+    var res = resolutionOptions.find(function(res) {return res.value == e.target.value})
+    if (res) {
+      this.setState({resolution: res})
     }
   }
 
@@ -60,6 +60,10 @@ export class BitrateCalculator extends React.Component {
       this.setState({framerate: framerate})
       return
     }
+  }
+
+  calculateBpp() {
+    return this.state.bitrate / (this.state.resolution.w * this.state.resolution.h) * this.state.framerate
   }
 
   render() {
@@ -109,7 +113,7 @@ export class BitrateCalculator extends React.Component {
               type: 'number',
               id: 'bpp',
               name: 'bpp',
-              value: this.state.bpp,
+              value: this.calculateBpp(),
               readOnly: true,
             }
           ),
