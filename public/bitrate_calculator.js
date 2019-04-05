@@ -2,7 +2,7 @@
 
 const e = React.createElement
 
-var resolutions = [
+var resolutionOptions = [
   {w: 640, h: 360},
   {w: 969, h: 392},
   {w: 768, h: 432},
@@ -16,14 +16,16 @@ var resolutions = [
   {w: 1600, h: 900},
   {w: 1920, h: 1080}
 ]
-resolutions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
+resolutionOptions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
+
+var framerateOptions = [10, 15, 20, 30, 45, 60]
 
 export class BitrateCalculator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       bitrate: props.bitrate || 1200,
-      resolution: props.resolution || resolutions[0],
+      resolution: props.resolution || resolutionOptions[0],
       framerate: props.framerate || 30,
       bpp: 0.1,
     }
@@ -42,9 +44,9 @@ export class BitrateCalculator extends React.Component {
   }
 
   changedResolution(e) {
-    var i = resolutions.find(function(res) {res.value == e.target.value})
+    var i = resolutionOptions.find(function(res) {res.value == e.target.value})
     if (i >= 0) {
-      this.setState({resolution: resolutions[i]})
+      this.setState({resolution: resolutionOptions[i]})
     }
   }
 
@@ -83,7 +85,7 @@ export class BitrateCalculator extends React.Component {
               value: this.state.resolution.value,
               onChange: this.changedResolution.bind(this),
             },
-            ...resolutions.map(function(res) {
+            ...resolutionOptions.map(function(res) {
               return e('option', {value: res.value}, res.value)
             })
           )
@@ -96,8 +98,9 @@ export class BitrateCalculator extends React.Component {
               value: this.state.framerate,
               onChange: this.changedFramerate.bind(this),
             },
-            e('option', { value: '10'}, '10'),
-            e('option', { value: '30'}, '30')
+            ...framerateOptions.map(function(fps) {
+              return e('option', {value: fps}, fps)
+            })
           )
         ),
         e('div', {},
