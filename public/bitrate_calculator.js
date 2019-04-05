@@ -2,12 +2,28 @@
 
 const e = React.createElement
 
+var resolutions = [
+  {w: 640, h: 360},
+  {w: 969, h: 392},
+  {w: 768, h: 432},
+  {w: 852, h: 480},
+  {w: 960, h: 540},
+  {w: 1096, h: 616},
+  {w: 1152, h: 648},
+  {w: 1280, h: 720},
+  {w: 1140, h: 810},
+  {w: 1536, h: 864},
+  {w: 1600, h: 900},
+  {w: 1920, h: 1080}
+]
+resolutions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
+
 export class BitrateCalculator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       bitrate: props.bitrate || 1200,
-      resolution: props.resolution || "853x480",
+      resolution: props.resolution || resolutions[0],
       framerate: props.framerate || 30,
       bpp: 0.1,
     }
@@ -26,7 +42,10 @@ export class BitrateCalculator extends React.Component {
   }
 
   changedResolution(e) {
-    this.setState({resolution: e.target.value})
+    var i = resolutions.find(function(res) {res.value == e.target.value})
+    if (i >= 0) {
+      this.setState({resolution: resolutions[i]})
+    }
   }
 
   changedFramerate(e) {
@@ -61,11 +80,12 @@ export class BitrateCalculator extends React.Component {
           e('select', {
               id: 'resolution',
               name: 'resolution',
-              value: this.state.resolution,
+              value: this.state.resolution.value,
               onChange: this.changedResolution.bind(this),
             },
-            e('option', { value: '640x360'}, '640x360'),
-            e('option', { value: '852x480'}, '852x480')
+            ...resolutions.map(function(res) {
+              return e('option', {value: res.value}, res.value)
+            })
           )
         ),
         e('div', {},
