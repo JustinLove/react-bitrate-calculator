@@ -1,4 +1,5 @@
 import {BitrateControl} from './BitrateControl.js'
+import {FramerateControl} from './FramerateControl.js'
 
 'use strict'
 
@@ -17,8 +18,6 @@ var resolutionOptions = [
   {w: 1920, h: 1080}
 ]
 resolutionOptions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
-
-var framerateOptions = [10, 15, 20, 30, 45, 60]
 
 var calculateBpp = function(state) {
   return state.bitrate * 1000 / (state.resolution.w * state.resolution.h * state.framerate)
@@ -52,19 +51,11 @@ export class BitrateCalculator extends React.Component {
     }
   }
 
-  changedFramerate(e) {
-    if (e.target.value == '') {
-      this.setState({framerate: ''})
-      return
-    }
-    var framerate = parseInt(e.target.value, 10)
-    if (!isNaN(framerate)) {
-      this.setState((prevState) => {
-        prevState.framerate = framerate
-        return {framerate: framerate, bpp: calculateBpp(prevState)}
-      })
-      return
-    }
+  changedFramerate(framerate) {
+    this.setState((prevState) => {
+      prevState.framerate = framerate
+      return {framerate: framerate, bpp: calculateBpp(prevState)}
+    })
   }
 
   render() {
@@ -89,19 +80,11 @@ export class BitrateCalculator extends React.Component {
             })}
           </select>
         </div>
-        <div>
-          <label htmlFor='framerate'>Framerate</label>{' '}
-          <select
-            id='framerate'
-            name='framerate'
+        <FramerateControl
             value={this.state.framerate}
             onChange={this.changedFramerate.bind(this)}
             >
-            {framerateOptions.map(function(fps) {
-              return <option value={fps} key={fps.toString()}>{fps}</option>
-            })}
-          </select>
-        </div>
+        </FramerateControl>
         <div>
           <label htmlFor='bpp'>bpp</label>{' '}
           <input
