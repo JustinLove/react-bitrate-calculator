@@ -1,4 +1,4 @@
-import {BitrateCalculator} from "./bitrate_calculator.js"
+import {BitrateCalculator} from "./BitrateCalculator.js"
 
 'use strict'
 
