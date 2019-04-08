@@ -21,7 +21,7 @@ resolutionOptions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
 var framerateOptions = [10, 15, 20, 30, 45, 60]
 
 var calculateBpp = function(state) {
-  return state.bitrate / (state.resolution.w * state.resolution.h) * state.framerate
+  return state.bitrate * 1000 / (state.resolution.w * state.resolution.h * state.framerate)
 }
 
 export class BitrateCalculator extends React.Component {
@@ -122,7 +122,7 @@ export class BitrateCalculator extends React.Component {
               type: 'number',
               id: 'bpp',
               name: 'bpp',
-              value: this.state.bpp,
+              value: this.state.bpp.toFixed(3),
               readOnly: true,
             }
           ),
