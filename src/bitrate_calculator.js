@@ -1,3 +1,5 @@
+import {BitrateControl} from './BitrateControl.js'
+
 'use strict'
 
 var resolutionOptions = [
@@ -33,19 +35,11 @@ export class BitrateCalculator extends React.Component {
     this.state.bpp = calculateBpp(this.state)
   }
 
-  changedBitrate(e) {
-    if (e.target.value == '') {
-      this.setState({bitrate: ''})
-      return
-    }
-    var bitrate = parseInt(e.target.value, 10)
-    if (!isNaN(bitrate)) {
-      this.setState((prevState) => {
-        prevState.bitrate = bitrate
-        return {bitrate: bitrate, bpp: calculateBpp(prevState)}
-      })
-      return
-    }
+  changedBitrate(bitrate) {
+    this.setState((prevState) => {
+      prevState.bitrate = bitrate
+      return {bitrate: bitrate, bpp: calculateBpp(prevState)}
+    })
   }
 
   changedResolution(e) {
@@ -77,32 +71,11 @@ export class BitrateCalculator extends React.Component {
     return <div>
       <h1>Bitrate Calculator</h1>
       <form>
-        <div>
-          <label htmlFor='bitrate'>Bitrate</label>{' '}
-          <input
-            type='number'
-            id='bitrate'
-            name='bitrate'
+        <BitrateControl
             value={this.state.bitrate}
             onChange={this.changedBitrate.bind(this)}
             >
-          </input>
-          {' '}
-          <label>0</label>
-          {' '}
-          <input
-            type='range'
-            id='bitrate-slider'
-            name='bitrate-slider'
-            max='6000'
-            step='1'
-            value={this.state.bitrate}
-            onChange={this.changedBitrate.bind(this)}
-            >
-          </input>
-          {' '}
-          <label>6000</label>
-        </div>
+        </BitrateControl>
         <div>
           <label htmlFor='resolution'>Resolution</label>{' '}
           <select
