@@ -49,20 +49,24 @@ export class BitrateCalculator extends React.Component {
     })
   }
 
+  radio(target) {
+    return <input
+      type='radio'
+      name='target'
+      id={'target-' + target}
+      value={target}
+      checked={this.state.target == target}
+      onChange={this.changedTarget.bind(this)}
+      >
+    </input>
+  }
+
   render() {
     return <div>
       <h1>Bitrate Calculator</h1>
       <form>
         <div>
-          <input
-            type='radio'
-            name='target'
-            id='target-bitrate'
-            value='bitrate'
-            checked={this.state.target == 'bitrate'}
-            onChange={this.changedTarget.bind(this)}
-            >
-          </input>
+          {this.radio('bitrate')}
           <BitrateControl
               value={this.state.bitrate}
               onChange={this.changedBitrate.bind(this)}
@@ -71,15 +75,7 @@ export class BitrateCalculator extends React.Component {
           </BitrateControl>
         </div>
         <div>
-          <input
-            type='radio'
-            name='target'
-            id='target-resolution'
-            value='resolution'
-            checked={this.state.target == 'resolution'}
-            onChange={this.changedTarget.bind(this)}
-            >
-          </input>
+          {this.radio('resolution')}
           <ResolutionControl
               value={this.state.resolution}
               onChange={this.changedResolution.bind(this)}
@@ -88,15 +84,7 @@ export class BitrateCalculator extends React.Component {
           </ResolutionControl>
         </div>
         <div>
-          <input
-            type='radio'
-            name='target'
-            id='target-framerate'
-            value='framerate'
-            checked={this.state.target == 'framerate'}
-            onChange={this.changedTarget.bind(this)}
-            >
-          </input>
+          {this.radio('framerate')}
           <FramerateControl
               value={this.state.framerate}
               onChange={this.changedFramerate.bind(this)}
@@ -105,15 +93,7 @@ export class BitrateCalculator extends React.Component {
           </FramerateControl>
         </div>
         <div>
-          <input
-            type='radio'
-            name='target'
-            id='target-bpp'
-            value='bpp'
-            checked={this.state.target == 'bpp'}
-            onChange={this.changedTarget.bind(this)}
-            >
-          </input>
+          {this.radio('bpp')}
           <BppControl
               value={this.state.bpp}
               className='target-control'
