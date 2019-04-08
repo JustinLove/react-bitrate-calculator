@@ -87,6 +87,21 @@ export class BitrateCalculator extends React.Component {
             onChange={this.changedBitrate.bind(this)}
             >
           </input>
+          {' '}
+          <label>0</label>
+          {' '}
+          <input
+            type='range'
+            id='bitrate-slider'
+            name='bitrate-slider'
+            max='6000'
+            step='1'
+            value={this.state.bitrate}
+            onChange={this.changedBitrate.bind(this)}
+            >
+          </input>
+          {' '}
+          <label>6000</label>
         </div>
         <div>
           <label htmlFor='resolution'>Resolution</label>{' '}
