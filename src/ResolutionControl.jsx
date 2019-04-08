@@ -28,6 +28,10 @@ export class ResolutionControl extends React.Component {
     }
   }
 
+  changedSlider(e) {
+    this.props.onChange(resolutionOptions[e.target.value])
+  }
+
   render() {
     return <div>
       <label htmlFor='resolution'>Resolution</label>{' '}
@@ -41,6 +45,18 @@ export class ResolutionControl extends React.Component {
           return <option value={res.value} key={res.value}>{res.value}</option>
         })}
       </select>
+      {' '}
+      <input
+        type='range'
+        id='resolution-slider'
+        name='resolution-slider'
+        min={0}
+        max={resolutionOptions.length-1}
+        step='1'
+        value={resolutionOptions.indexOf(this.props.value)}
+        onChange={this.changedSlider.bind(this)}
+        >
+      </input>
     </div>
   }
 }
