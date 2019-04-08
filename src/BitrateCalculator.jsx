@@ -1,6 +1,7 @@
 import {BitrateControl} from './BitrateControl.js'
 import {ResolutionControl, resolutionOptions} from './ResolutionControl.js'
 import {FramerateControl} from './FramerateControl.js'
+import {BppControl} from './BppControl.js'
 
 'use strict'
 
@@ -59,17 +60,10 @@ export class BitrateCalculator extends React.Component {
             onChange={this.changedFramerate.bind(this)}
             >
         </FramerateControl>
-        <div>
-          <label htmlFor='bpp'>bpp</label>{' '}
-          <input
-            type='number'
-            id='bpp'
-            name='bpp'
-            value={this.state.bpp.toFixed(3)}
-            readOnly={true}
+        <BppControl
+            value={this.state.bpp}
             >
-          </input>
-        </div>
+        </BppControl>
       </form>
     </div>
   }
