@@ -19,6 +19,10 @@ export class FramerateControl extends React.Component {
     }
   }
 
+  changedSlider(e) {
+    this.props.onChange(framerateOptions[e.target.value])
+  }
+
   render() {
     return <div>
       <label htmlFor='framerate'>Framerate</label>{' '}
@@ -32,6 +36,18 @@ export class FramerateControl extends React.Component {
           return <option value={fps} key={fps.toString()}>{fps}</option>
         })}
       </select>
+      {' '}
+      <input
+        type='range'
+        id='framerate-slider'
+        name='framerate-slider'
+        min={0}
+        max={framerateOptions.length-1}
+        step='1'
+        value={framerateOptions.indexOf(this.props.value)}
+        onChange={this.changedSlider.bind(this)}
+        >
+      </input>
     </div>
   }
 }
