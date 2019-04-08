@@ -6,7 +6,7 @@ export class BppControl extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className={this.props.className}>
       <label htmlFor='bpp'>BPP</label>{' '}
       <input
         type='number'

@@ -16,6 +16,7 @@ export class BitrateCalculator extends React.Component {
       bitrate: props.bitrate || 1200,
       resolution: props.resolution || resolutionOptions[0],
       framerate: props.framerate || 30,
+      target: 'bpp',
     }
     this.state.bpp = calculateBpp(this.state)
   }
@@ -41,29 +42,84 @@ export class BitrateCalculator extends React.Component {
     })
   }
 
+  changedTarget(e) {
+    var target = e.target.value
+    this.setState((prevState) => {
+      return {target: target, bpp: calculateBpp(prevState)}
+    })
+  }
+
   render() {
     return <div>
       <h1>Bitrate Calculator</h1>
       <form>
-        <BitrateControl
-            value={this.state.bitrate}
-            onChange={this.changedBitrate.bind(this)}
+        <div>
+          <input
+            type='radio'
+            name='target'
+            id='target-bitrate'
+            value='bitrate'
+            checked={this.state.target == 'bitrate'}
+            onChange={this.changedTarget.bind(this)}
             >
-        </BitrateControl>
-        <ResolutionControl
-            value={this.state.resolution}
-            onChange={this.changedResolution.bind(this)}
+          </input>
+          <BitrateControl
+              value={this.state.bitrate}
+              onChange={this.changedBitrate.bind(this)}
+              className='target-control'
+              >
+          </BitrateControl>
+        </div>
+        <div>
+          <input
+            type='radio'
+            name='target'
+            id='target-resolution'
+            value='resolution'
+            checked={this.state.target == 'resolution'}
+            onChange={this.changedTarget.bind(this)}
             >
-        </ResolutionControl>
-        <FramerateControl
-            value={this.state.framerate}
-            onChange={this.changedFramerate.bind(this)}
+          </input>
+          <ResolutionControl
+              value={this.state.resolution}
+              onChange={this.changedResolution.bind(this)}
+              className='target-control'
+              >
+          </ResolutionControl>
+        </div>
+        <div>
+          <input
+            type='radio'
+            name='target'
+            id='target-framerate'
+            value='framerate'
+            checked={this.state.target == 'framerate'}
+            onChange={this.changedTarget.bind(this)}
             >
-        </FramerateControl>
-        <BppControl
-            value={this.state.bpp}
+          </input>
+          <FramerateControl
+              value={this.state.framerate}
+              onChange={this.changedFramerate.bind(this)}
+              className='target-control'
+              >
+          </FramerateControl>
+        </div>
+        <div>
+          <input
+            type='radio'
+            name='target'
+            id='target-bpp'
+            value='bpp'
+            checked={this.state.target == 'bpp'}
+            onChange={this.changedTarget.bind(this)}
             >
-        </BppControl>
+          </input>
+          <BppControl
+              value={this.state.bpp}
+              className='target-control'
+              >
+          </BppControl>
+        </div>
       </form>
     </div>
   }

@@ -33,7 +33,7 @@ export class ResolutionControl extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className={this.props.className}>
       <label htmlFor='resolution'>Resolution</label>{' '}
       <select
         id='resolution'

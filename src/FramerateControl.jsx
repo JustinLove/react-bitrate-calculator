@@ -24,7 +24,7 @@ export class FramerateControl extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className={this.props.className}>
       <label htmlFor='framerate'>Framerate</label>{' '}
       <select
         id='framerate'

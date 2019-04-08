@@ -18,7 +18,7 @@ export class BitrateControl extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className={this.props.className}>
         <label htmlFor='bitrate'>Bitrate</label>{' '}
         <input
           type='number'
