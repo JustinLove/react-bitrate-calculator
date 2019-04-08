@@ -78,7 +78,7 @@ export class BitrateCalculator extends React.Component {
       <h1>Bitrate Calculator</h1>
       <form>
         <div>
-          <label htmlFor='bitrate'>Bitrate</label> 
+          <label htmlFor='bitrate'>Bitrate</label>{' '}
           <input
             type='number'
             id='bitrate'
@@ -89,7 +89,7 @@ export class BitrateCalculator extends React.Component {
           </input>
         </div>
         <div>
-          <label htmlFor='resolution'>Resolution</label> 
+          <label htmlFor='resolution'>Resolution</label>{' '}
           <select
             id='resolution'
             name='resolution'
@@ -102,7 +102,7 @@ export class BitrateCalculator extends React.Component {
           </select>
         </div>
         <div>
-          <label htmlFor='framerate'>Framerate</label> 
+          <label htmlFor='framerate'>Framerate</label>{' '}
           <select
             id='framerate'
             name='framerate'
@@ -115,7 +115,7 @@ export class BitrateCalculator extends React.Component {
           </select>
         </div>
         <div>
-          <label htmlFor='bpp'>bpp</label> 
+          <label htmlFor='bpp'>bpp</label>{' '}
           <input
             type='number'
             id='bpp'
