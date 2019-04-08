@@ -1,7 +1,5 @@
 'use strict'
 
-const e = React.createElement
-
 var resolutionOptions = [
   {w: 640, h: 360},
   {w: 969, h: 392},
@@ -76,58 +74,58 @@ export class BitrateCalculator extends React.Component {
   }
 
   render() {
-    return e('div', {},
-      e('h1', {}, 'Bitrate Calculator'),
-      e('form', {},
-        e('div', {},
-          e('label', { htmlFor: 'bitrate' }, 'Bitrate '),
-          e('input', {
-              type: 'number',
-              id: 'bitrate',
-              name: 'bitrate',
-              value: this.state.bitrate,
-              onChange: this.changedBitrate.bind(this),
-            }
-          ),
-        ),
-        e('div', {},
-          e('label', { htmlFor: 'resolution' }, 'Resolution '),
-          e('select', {
-              id: 'resolution',
-              name: 'resolution',
-              value: this.state.resolution.value,
-              onChange: this.changedResolution.bind(this),
-            },
-            ...resolutionOptions.map(function(res) {
-              return e('option', {value: res.value}, res.value)
-            })
-          )
-        ),
-        e('div', {},
-          e('label', { htmlFor: 'framerate' }, 'framerate '),
-          e('select', {
-              id: 'framerate',
-              name: 'framerate',
-              value: this.state.framerate,
-              onChange: this.changedFramerate.bind(this),
-            },
-            ...framerateOptions.map(function(fps) {
-              return e('option', {value: fps}, fps)
-            })
-          )
-        ),
-        e('div', {},
-          e('label', { htmlFor: 'bpp' }, 'bpp '),
-          e('input', {
-              type: 'number',
-              id: 'bpp',
-              name: 'bpp',
-              value: this.state.bpp.toFixed(3),
-              readOnly: true,
-            }
-          ),
-        )
-      )
-    )
+    return <div>
+      <h1>Bitrate Calculator</h1>
+      <form>
+        <div>
+          <label htmlFor='bitrate'>Bitrate</label> 
+          <input
+            type='number'
+            id='bitrate'
+            name='bitrate'
+            value={this.state.bitrate}
+            onChange={this.changedBitrate.bind(this)}
+            >
+          </input>
+        </div>
+        <div>
+          <label htmlFor='resolution'>Resolution</label> 
+          <select
+            id='resolution'
+            name='resolution'
+            value={this.state.resolution.value}
+            onChange={this.changedResolution.bind(this)}
+            >
+            {resolutionOptions.map(function(res) {
+              return <option value={res.value} key={res.value}>{res.value}</option>
+            })}
+          </select>
+        </div>
+        <div>
+          <label htmlFor='framerate'>Framerate</label> 
+          <select
+            id='framerate'
+            name='framerate'
+            value={this.state.framerate}
+            onChange={this.changedFramerate.bind(this)}
+            >
+            {framerateOptions.map(function(fps) {
+              return <option value={fps} key={fps.toString()}>{fps}</option>
+            })}
+          </select>
+        </div>
+        <div>
+          <label htmlFor='bpp'>bpp</label> 
+          <input
+            type='number'
+            id='bpp'
+            name='bpp'
+            value={this.state.bpp.toFixed(3)}
+            readOnly={true}
+            >
+          </input>
+        </div>
+      </form>
+    </div>
   }
 }
