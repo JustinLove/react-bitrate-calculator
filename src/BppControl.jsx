@@ -38,6 +38,23 @@ export class BppControl extends React.Component {
         disabled={this.props.disabled}
         >
       </input>
+      {' '}
+      <label>0.05</label>
+      {' '}
+      <input
+        type='range'
+        id='bpp-slider'
+        name='bpp-slider'
+        min='0.05'
+        max='0.5'
+        step='0.01'
+        value={this.state.stringValue}
+        onChange={this.changedStringValue.bind(this)}
+        disabled={this.props.disabled}
+        >
+      </input>
+      {' '}
+      <label>0.5</label>
     </div>
   }
 }
