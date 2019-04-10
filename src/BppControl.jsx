@@ -3,12 +3,12 @@
 export class BppControl extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { prevValue: props.value, stringValue: this.props.value.toFixed(3) }
+    this.state = { stringValue: this.props.value.toFixed(3) }
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.value != state.prevValue) {
-      return { prevValue: props.value, stringValue: props.value.toFixed(3) }
+    if (props.disabled) {
+      return { stringValue: props.value.toFixed(3) }
     }
     return null
   }
@@ -35,6 +35,7 @@ export class BppControl extends React.Component {
         name='bpp'
         value={this.state.stringValue}
         onChange={this.changedStringValue.bind(this)}
+        disabled={this.props.disabled}
         >
       </input>
     </div>

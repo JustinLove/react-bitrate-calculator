@@ -40,6 +40,7 @@ export class ResolutionControl extends React.Component {
         name='resolution'
         value={this.props.value.value}
         onChange={this.changedResolution.bind(this)}
+        disabled={this.props.disabled}
         >
         {resolutionOptions.map(function(res) {
           return <option value={res.value} key={res.value}>{res.value}</option>
@@ -55,6 +56,7 @@ export class ResolutionControl extends React.Component {
         step='1'
         value={resolutionOptions.indexOf(this.props.value)}
         onChange={this.changedSlider.bind(this)}
+        disabled={this.props.disabled}
         >
       </input>
     </div>

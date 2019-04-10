@@ -76,6 +76,7 @@ export class BitrateCalculator extends React.Component {
           <BitrateControl
               value={this.state.bitrate}
               onChange={this.changedBitrate.bind(this)}
+              disabled={this.state.target == 'bitrate'}
               className='target-control'
               >
           </BitrateControl>
@@ -85,6 +86,7 @@ export class BitrateCalculator extends React.Component {
           <ResolutionControl
               value={this.state.resolution}
               onChange={this.changedResolution.bind(this)}
+              disabled={this.state.target == 'resolution'}
               className='target-control'
               >
           </ResolutionControl>
@@ -94,6 +96,7 @@ export class BitrateCalculator extends React.Component {
           <FramerateControl
               value={this.state.framerate}
               onChange={this.changedFramerate.bind(this)}
+              disabled={this.state.target == 'framerate'}
               className='target-control'
               >
           </FramerateControl>
@@ -103,6 +106,7 @@ export class BitrateCalculator extends React.Component {
           <BppControl
               value={this.state.bpp}
               onChange={this.changedBpp.bind(this)}
+              disabled={this.state.target == 'bpp'}
               className='target-control'
               >
           </BppControl>

@@ -31,6 +31,7 @@ export class FramerateControl extends React.Component {
         name='framerate'
         value={this.props.value}
         onChange={this.changedFramerate.bind(this)}
+        disabled={this.props.disabled}
         >
         {framerateOptions.map(function(fps) {
           return <option value={fps} key={fps.toString()}>{fps}</option>
@@ -46,6 +47,7 @@ export class FramerateControl extends React.Component {
         step='1'
         value={framerateOptions.indexOf(this.props.value)}
         onChange={this.changedSlider.bind(this)}
+        disabled={this.props.disabled}
         >
       </input>
     </div>

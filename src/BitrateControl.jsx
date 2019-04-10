@@ -26,6 +26,7 @@ export class BitrateControl extends React.Component {
           name='bitrate'
           value={this.props.value}
           onChange={this.changedBitrate.bind(this)}
+          disabled={this.props.disabled}
           >
         </input>
         {' '}
@@ -39,6 +40,7 @@ export class BitrateControl extends React.Component {
           step='1'
           value={this.props.value}
           onChange={this.changedBitrate.bind(this)}
+          disabled={this.props.disabled}
           >
         </input>
         {' '}
