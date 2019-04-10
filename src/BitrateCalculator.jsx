@@ -42,6 +42,12 @@ export class BitrateCalculator extends React.Component {
     })
   }
 
+  changedBpp(bpp) {
+    this.setState((prevState) => {
+      return {bpp: bpp}
+    })
+  }
+
   changedTarget(e) {
     var target = e.target.value
     this.setState((prevState) => {
@@ -96,6 +102,7 @@ export class BitrateCalculator extends React.Component {
           {this.radio('bpp')}
           <BppControl
               value={this.state.bpp}
+              onChange={this.changedBpp.bind(this)}
               className='target-control'
               >
           </BppControl>
