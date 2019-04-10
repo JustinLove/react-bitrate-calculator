@@ -1,6 +1,6 @@
 'use strict'
 
-const framerateOptions = [10, 15, 20, 30, 45, 60]
+export const framerateOptions = [10, 15, 20, 30, 45, 60]
 
 export class FramerateControl extends React.Component {
   constructor(props) {
