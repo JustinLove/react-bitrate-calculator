@@ -1,6 +1,6 @@
 'use strict'
 
-var framerateOptions = [10, 15, 20, 30, 45, 60]
+const framerateOptions = [10, 15, 20, 30, 45, 60]
 
 export class FramerateControl extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export class FramerateControl extends React.Component {
       this.props.onChange('')
       return
     }
-    var framerate = parseInt(e.target.value, 10)
+    const framerate = parseInt(e.target.value, 10)
     if (!isNaN(framerate)) {
       this.props.onChange(framerate)
       return
@@ -33,9 +33,9 @@ export class FramerateControl extends React.Component {
         onChange={this.changedFramerate.bind(this)}
         disabled={this.props.disabled}
         >
-        {framerateOptions.map(function(fps) {
-          return <option value={fps} key={fps.toString()}>{fps}</option>
-        })}
+        {framerateOptions.map(fps =>
+          <option value={fps} key={fps.toString()}>{fps}</option>
+        )}
       </select>
       {' '}
       <input

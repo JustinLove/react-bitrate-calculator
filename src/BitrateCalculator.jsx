@@ -5,8 +5,20 @@ import {BppControl} from './BppControl.js'
 
 'use strict'
 
-var calculateBpp = function(state) {
-  return state.bitrate * 1000 / (state.resolution.w * state.resolution.h * state.framerate)
+const calculateBitrate = function({resolution: {w, h}, framerate, bpp}) {
+  return w * h * framerate * bpp / 1000
+}
+
+const calculateBpp = function({bitrate, resolution: {w, h}, framerate}) {
+  return bitrate * 1000 / (w * h * framerate)
+}
+
+const optimize = function(state) {
+  switch (state.target) {
+    case 'bitrate': return {bitrate: calculateBitrate(state)}
+    case 'bpp': return {bpp: calculateBpp(state)}
+    default: console.warn('unknown optimize target'); return {}
+  }
 }
 
 export class BitrateCalculator extends React.Component {
@@ -24,34 +36,36 @@ export class BitrateCalculator extends React.Component {
   changedBitrate(bitrate) {
     this.setState((prevState) => {
       prevState.bitrate = bitrate
-      return {bitrate: bitrate, bpp: calculateBpp(prevState)}
+      return Object.assign({bitrate}, optimize(prevState))
     })
   }
 
-  changedResolution(res) {
+  changedResolution(resolution) {
     this.setState((prevState) => {
-      prevState.resolution = res
-      return {resolution: res, bpp: calculateBpp(prevState)}
+      prevState.resolution = resolution
+      return Object.assign({resolution}, optimize(prevState))
     })
   }
 
   changedFramerate(framerate) {
     this.setState((prevState) => {
       prevState.framerate = framerate
-      return {framerate: framerate, bpp: calculateBpp(prevState)}
+      return Object.assign({framerate}, optimize(prevState))
     })
   }
 
   changedBpp(bpp) {
     this.setState((prevState) => {
-      return {bpp: bpp}
+      prevState.bpp = bpp
+      return Object.assign({bpp}, optimize(prevState))
     })
   }
 
   changedTarget(e) {
-    var target = e.target.value
+    const target = e.target.value
     this.setState((prevState) => {
-      return {target: target, bpp: calculateBpp(prevState)}
+      prevState.target = target
+      return Object.assign({target}, optimize(prevState))
     })
   }
 

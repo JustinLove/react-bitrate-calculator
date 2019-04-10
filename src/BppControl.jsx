@@ -19,7 +19,7 @@ export class BppControl extends React.Component {
       this.props.onChange('')
       return
     }
-    var bpp = parseFloat(e.target.value)
+    const bpp = parseFloat(e.target.value)
     if (!isNaN(bpp)) {
       this.props.onChange(bpp)
       return

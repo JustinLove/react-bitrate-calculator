@@ -1,6 +1,6 @@
 'use strict'
 
-export var resolutionOptions = [
+export const resolutionOptions = [
   {w: 640, h: 360},
   {w: 969, h: 392},
   {w: 768, h: 432},
@@ -14,7 +14,7 @@ export var resolutionOptions = [
   {w: 1600, h: 900},
   {w: 1920, h: 1080}
 ]
-resolutionOptions.forEach(function(res) { res.value = `${res.w}x${res.h}`})
+resolutionOptions.forEach((res) => res.value = `${res.w}x${res.h}`)
 
 export class ResolutionControl extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export class ResolutionControl extends React.Component {
   }
 
   changedResolution(e) {
-    var res = resolutionOptions.find(function(res) {return res.value == e.target.value})
+    const res = resolutionOptions.find(res => res.value == e.target.value)
     if (res) {
       this.props.onChange(res)
     }
@@ -42,9 +42,9 @@ export class ResolutionControl extends React.Component {
         onChange={this.changedResolution.bind(this)}
         disabled={this.props.disabled}
         >
-        {resolutionOptions.map(function(res) {
-          return <option value={res.value} key={res.value}>{res.value}</option>
-        })}
+        {resolutionOptions.map(res =>
+          <option value={res.value} key={res.value}>{res.value}</option>
+        )}
       </select>
       {' '}
       <input

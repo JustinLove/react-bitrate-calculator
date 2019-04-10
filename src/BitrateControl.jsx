@@ -10,7 +10,7 @@ export class BitrateControl extends React.Component {
       this.props.onChange('')
       return
     }
-    var bitrate = parseInt(e.target.value, 10)
+    const bitrate = parseInt(e.target.value, 10)
     if (!isNaN(bitrate)) {
       this.props.onChange(bitrate)
       return
