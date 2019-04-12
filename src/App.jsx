@@ -1,5 +1,4 @@
 import {BitrateCalculator} from "./BitrateCalculator.js"
-import {ChatBot} from "./ChatBot.js"
 
 'use strict'
 
@@ -14,8 +13,7 @@ export class App extends React.Component {
 
   render() {
     return <div>
-      <BitrateCalculator/>
-      <ChatBot
+      <BitrateCalculator
         username="wondibot"
         oauthToken={this.state.oauthToken}
         channel="wondible"

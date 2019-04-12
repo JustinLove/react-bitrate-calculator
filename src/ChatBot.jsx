@@ -1,4 +1,5 @@
 import {clientId} from "./TwitchId.js"
+import {resolutionOptions} from "./ResolutionControl.js"
 
 'use strict'
 
@@ -49,8 +50,52 @@ export class ChatBot extends React.Component {
     this.setState({addr: null, port: null})
   }
 
+  reportCurrentSettings() {
+    if (this.client) {
+      this.client.say(`#${this.props.channel}`, `${this.props.resolution.value}p${this.props.framerate} at ${this.props.bitrate}kbps ${this.props.bpp.toFixed(3)}bpp`)
+    }
+  }
+
   onChatMessage(target, context, msg, self) {
     console.log(arguments)
+    if (self) return
+
+    const commandName = msg.trim()
+
+    let match
+
+    if (commandName == '!bitrate') {
+      this.client.say(target, `current bitrate is set at ${this.props.bitrate}`)
+    } else if (match = commandName.match(/!bpp (\d+)p(\d+) (\d+)/)) {
+      const [_, inputHeight, inputFramerate, inputBitrate] = match
+      console.log(inputHeight, inputFramerate, inputBitrate)
+
+      const res = resolutionOptions.find(res => res.h == inputHeight)
+      if (!res) {
+        this.client.say(target, "resolution height not found")
+        return
+      }
+
+      const framerate = parseInt(inputFramerate, 10)
+      if (isNaN(framerate)) {
+        this.client.say(target, "could not parse framerate")
+        return
+      }
+
+      const bitrate = parseInt(inputBitrate, 10)
+      if (isNaN(bitrate)) {
+        this.client.say(target, "could not parse bitrate")
+        return
+      }
+
+      this.props.onChangeTarget({target: {value: 'bpp'}})
+      this.props.onChangeBitrate(bitrate)
+      this.props.onChangeResolution(res)
+      this.props.onChangeFramerate(framerate)
+      setTimeout(this.reportCurrentSettings.bind(this), 1000)
+    } else {
+      console.log('unknown command')
+    }
   }
 
   onChatConnected(addr, port) {
