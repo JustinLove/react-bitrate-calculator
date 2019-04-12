@@ -57,7 +57,7 @@ export class ChatBot extends React.Component {
   }
 
   onChatMessage(target, context, msg, self) {
-    console.log(arguments)
+    //console.log(arguments)
     if (self) return
 
     const commandName = msg.trim()
@@ -66,37 +66,75 @@ export class ChatBot extends React.Component {
 
     if (commandName == '!bitrate') {
       this.client.say(target, `current bitrate is set at ${this.props.bitrate}`)
-    } else if (match = commandName.match(/!bpp (\d+)p(\d+) (\d+)/)) {
-      const [_, inputHeight, inputFramerate, inputBitrate] = match
-      console.log(inputHeight, inputFramerate, inputBitrate)
+    } else if (commandName.startsWith('!calc')) {
+      let [_, ...parts] = commandName.split(' ')
 
-      const res = resolutionOptions.find(res => res.h == inputHeight)
-      if (!res) {
-        this.client.say(target, "resolution height not found")
-        return
-      }
+      let settings = {}
 
-      const framerate = parseInt(inputFramerate, 10)
-      if (isNaN(framerate)) {
-        this.client.say(target, "could not parse framerate")
-        return
-      }
+      parts.forEach(s => {
+        let match
+        if (match = s.match(/(\d+)p(\d+)/)) {
+          const [_, inputHeight, inputFramerate] = match
 
-      const bitrate = parseInt(inputBitrate, 10)
-      if (isNaN(bitrate)) {
-        this.client.say(target, "could not parse bitrate")
-        return
-      }
+          settings.resolution = resolutionOptions.find(res => res.h == inputHeight)
+          if (!settings.resolution) {
+            this.client.say(target, "resolution height not found")
+            return
+          }
 
-      this.props.onChangeSettings({
-        target: 'bpp',
-        bitrate: bitrate,
-        resolution: res,
-        framerate: framerate,
+          settings.framerate = parseInt(inputFramerate, 10)
+          if (isNaN(settings.framerate)) {
+            this.client.say(target, "could not parse framerate")
+            return
+          }
+        } else if (match = s.match(/(\d+)x(\d+)/)) {
+          const input = match[0]
+
+          settings.resolution = resolutionOptions.find(res => res.value == input)
+          if (!settings.resolution) {
+            this.client.say(target, "resolution not found")
+            return
+          }
+        } else if (parseInt(s) == 0) {
+          settings.bpp = parseFloat(s)
+        } else if (!isNaN(parseInt(s))) {
+          const value = parseInt(s)
+          if (value <= 144) {
+            settings.framerate = value
+          } else {
+            settings.bitrate = value
+          }
+        } else {
+          this.client.say(target, "unrecognized parameter " + s)
+        }
       })
+
+      if (settings.bitrate == null
+        && settings.resolution
+        && settings.framerate
+        && settings.bpp) {
+        settings.target = 'bitrate'
+      } else if (settings.bitrate
+        && settings.resolution == null
+        && settings.framerate
+        && settings.bpp) {
+        settings.target = 'resolution'
+      } else if (settings.bitrate
+        && settings.resolution
+        && settings.framerate == null
+        && settings.bpp) {
+        settings.target = 'resolution'
+      } else if (settings.bitrate
+        && settings.resolution
+        && settings.framerate
+        && settings.bpp == null) {
+        settings.target = 'bpp'
+      }
+
+      this.props.onChangeSettings(settings)
       setTimeout(this.reportCurrentSettings.bind(this), 1000)
     } else {
-      console.log('unknown command')
+      //console.log('unknown command')
     }
   }
 
