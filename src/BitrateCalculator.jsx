@@ -67,40 +67,30 @@ export class BitrateCalculator extends React.Component {
     this.state.bpp = calculateBpp(this.state)
   }
 
-  changedBitrate(bitrate) {
+  changedSettings(settings) {
     this.setState((prevState) => {
-      prevState.bitrate = bitrate
-      return Object.assign({bitrate}, optimize(prevState))
+      return Object.assign(settings, optimize(Object.assign(prevState, settings)))
     })
+  }
+
+  changedBitrate(bitrate) {
+    this.changedSettings({bitrate})
   }
 
   changedResolution(resolution) {
-    this.setState((prevState) => {
-      prevState.resolution = resolution
-      return Object.assign({resolution}, optimize(prevState))
-    })
+    this.changedSettings({resolution})
   }
 
   changedFramerate(framerate) {
-    this.setState((prevState) => {
-      prevState.framerate = framerate
-      return Object.assign({framerate}, optimize(prevState))
-    })
+    this.changedSettings({framerate})
   }
 
   changedBpp(bpp) {
-    this.setState((prevState) => {
-      prevState.bpp = bpp
-      return Object.assign({bpp}, optimize(prevState))
-    })
+    this.changedSettings({bpp})
   }
 
   changedTarget(e) {
-    const target = e.target.value
-    this.setState((prevState) => {
-      prevState.target = target
-      return Object.assign({target}, optimize(prevState))
-    })
+    this.changedSettings({target: e.target.value})
   }
 
   radio(target) {
@@ -164,6 +154,7 @@ export class BitrateCalculator extends React.Component {
         username="wondibot"
         oauthToken={this.props.oauthToken}
         channel="wondible"
+        onChangeSettings={this.changedSettings.bind(this)}
         onChangeTarget={this.changedTarget.bind(this)}
         bitrate={this.state.bitrate}
         onChangeBitrate={this.changedBitrate.bind(this)}

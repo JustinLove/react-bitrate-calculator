@@ -88,10 +88,12 @@ export class ChatBot extends React.Component {
         return
       }
 
-      this.props.onChangeTarget({target: {value: 'bpp'}})
-      this.props.onChangeBitrate(bitrate)
-      this.props.onChangeResolution(res)
-      this.props.onChangeFramerate(framerate)
+      this.props.onChangeSettings({
+        target: 'bpp',
+        bitrate: bitrate,
+        resolution: res,
+        framerate: framerate,
+      })
       setTimeout(this.reportCurrentSettings.bind(this), 1000)
     } else {
       console.log('unknown command')
