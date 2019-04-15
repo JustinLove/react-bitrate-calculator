@@ -143,7 +143,10 @@ export class ChatBot extends React.Component {
   }
 
   connectedStatus() {
-    return <p>{this.state.addr}:{this.state.port}</p>
+    return <div>
+      <p>{this.state.addr}:{this.state.port}</p>
+      <button onClick={this.reportCurrentSettings.bind(this)}>Post to chat</button>
+    </div>
   }
 
   defaultStatus() {
