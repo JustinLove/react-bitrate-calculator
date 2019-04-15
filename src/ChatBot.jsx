@@ -1,5 +1,5 @@
 import {clientId} from "./TwitchId.js"
-import {resolutionOptions} from "./ResolutionControl.js"
+import * as Calc from "./Calculator.js"
 
 'use strict'
 
@@ -76,7 +76,7 @@ export class ChatBot extends React.Component {
         if (match = s.match(/(\d+)p(\d+)/)) {
           const [_, inputHeight, inputFramerate] = match
 
-          settings.resolution = resolutionOptions.find(res => res.h == inputHeight)
+          settings.resolution = Calc.resolutionOptions.find(res => res.h == inputHeight)
           if (!settings.resolution) {
             this.client.say(target, "resolution height not found")
             return
@@ -90,7 +90,7 @@ export class ChatBot extends React.Component {
         } else if (match = s.match(/(\d+)x(\d+)/)) {
           const input = match[0]
 
-          settings.resolution = resolutionOptions.find(res => res.value == input)
+          settings.resolution = Calc.resolutionOptions.find(res => res.value == input)
           if (!settings.resolution) {
             this.client.say(target, "resolution not found")
             return
@@ -114,25 +114,29 @@ export class ChatBot extends React.Component {
         && settings.framerate
         && settings.bpp) {
         settings.target = 'bitrate'
+        this.client.say(target, `${Calc.calculateBitrate(settings)}kbps`)
       } else if (settings.bitrate
         && settings.resolution == null
         && settings.framerate
         && settings.bpp) {
         settings.target = 'resolution'
+        const res = Calc.calculateResolution(settings)
+        this.client.say(target, `${res.w}x${res.h}`)
       } else if (settings.bitrate
         && settings.resolution
         && settings.framerate == null
         && settings.bpp) {
-        settings.target = 'resolution'
+        settings.target = 'framerate'
+        this.client.say(target, `${Calc.calculateFramerate(settings)} fps`)
       } else if (settings.bitrate
         && settings.resolution
         && settings.framerate
         && settings.bpp == null) {
         settings.target = 'bpp'
+        this.client.say(target, `${Calc.calculateBpp(settings).toFixed(3)} bpp`)
       }
 
       this.props.onChangeSettings(settings)
-      setTimeout(this.reportCurrentSettings.bind(this), 1000)
     } else {
       //console.log('unknown command')
     }

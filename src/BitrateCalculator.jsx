@@ -1,56 +1,18 @@
+import * as Calc from './Calculator.js'
 import {BitrateControl} from './BitrateControl.js'
-import {ResolutionControl, resolutionOptions} from './ResolutionControl.js'
-import {FramerateControl, framerateOptions} from './FramerateControl.js'
+import {ResolutionControl} from './ResolutionControl.js'
+import {FramerateControl} from './FramerateControl.js'
 import {BppControl} from './BppControl.js'
 import {ChatBot} from './ChatBot.js'
 
 'use strict'
 
-const preparePps = function() {
-  let videoOptions = []
-  for (let resolution of resolutionOptions) {
-    for (let framerate of framerateOptions) {
-      videoOptions.push({
-        resolution,
-        framerate,
-        pps: resolution.w * resolution.h * framerate,
-      })
-    }
-  }
-
-  return videoOptions
-}
-
-const videoOptions = preparePps()
-
-const calculateBitrate = function({resolution: {w, h}, framerate, bpp}) {
-  return w * h * framerate * bpp / 1000
-}
-
-const calculateResolution = function({bitrate, framerate, bpp}) {
-  let targetPps = bitrate * 1000 / bpp
-  return videoOptions
-    .filter(({framerate: fps}) => fps == framerate)
-    .sort((a, b) => Math.abs(targetPps - a.pps) - Math.abs(targetPps - b.pps))[0].resolution
-}
-
-const calculateFramerate = function({bitrate, resolution, bpp}) {
-  let targetPps = bitrate * 1000 / bpp
-  return videoOptions
-    .filter(({resolution: res}) => res == resolution)
-    .sort((a, b) => Math.abs(targetPps - a.pps) - Math.abs(targetPps - b.pps))[0].framerate
-}
-
-const calculateBpp = function({bitrate, resolution: {w, h}, framerate}) {
-  return bitrate * 1000 / (w * h * framerate)
-}
-
 const optimize = function(state) {
   switch (state.target) {
-    case 'bitrate': return {bitrate: calculateBitrate(state)}
-    case 'resolution': return {resolution: calculateResolution(state)}
-    case 'framerate': return {framerate: calculateFramerate(state)}
-    case 'bpp': return {bpp: calculateBpp(state)}
+    case 'bitrate': return {bitrate: Calc.calculateBitrate(state)}
+    case 'resolution': return {resolution: Calc.calculateResolution(state)}
+    case 'framerate': return {framerate: Calc.calculateFramerate(state)}
+    case 'bpp': return {bpp: Calc.calculateBpp(state)}
     default: console.warn('unknown optimize target'); return {}
   }
 }
@@ -60,11 +22,11 @@ export class BitrateCalculator extends React.Component {
     super(props)
     this.state = {
       bitrate: props.bitrate || 1200,
-      resolution: props.resolution || resolutionOptions[0],
+      resolution: props.resolution || Calc.resolutionOptions[0],
       framerate: props.framerate || 30,
       target: 'bpp',
     }
-    this.state.bpp = calculateBpp(this.state)
+    this.state.bpp = Calc.calculateBpp(this.state)
   }
 
   changedSettings(settings) {

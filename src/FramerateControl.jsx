@@ -1,6 +1,6 @@
-'use strict'
+import {framerateOptions} from './Calculator.js'
 
-export const framerateOptions = [10, 15, 20, 30, 45, 60]
+'use strict'
 
 export class FramerateControl extends React.Component {
   constructor(props) {

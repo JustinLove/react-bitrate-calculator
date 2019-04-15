@@ -1,20 +1,6 @@
-'use strict'
+import {resolutionOptions} from './Calculator.js'
 
-export const resolutionOptions = [
-  {w: 640, h: 360},
-  {w: 969, h: 392},
-  {w: 768, h: 432},
-  {w: 852, h: 480},
-  {w: 960, h: 540},
-  {w: 1096, h: 616},
-  {w: 1152, h: 648},
-  {w: 1280, h: 720},
-  {w: 1140, h: 810},
-  {w: 1536, h: 864},
-  {w: 1600, h: 900},
-  {w: 1920, h: 1080}
-]
-resolutionOptions.forEach((res) => res.value = `${res.w}x${res.h}`)
+'use strict'
 
 export class ResolutionControl extends React.Component {
   constructor(props) {
