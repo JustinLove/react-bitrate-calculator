@@ -1,4 +1,5 @@
 import {BitrateCalculator} from "./BitrateCalculator.js"
+import {store} from './store.js'
 
 'use strict'
 
@@ -22,5 +23,9 @@ export class App extends React.Component {
   }
 }
 
+let Provider = ReactRedux.Provider
+
 const reactRoot = document.querySelector('#react-root')
-ReactDOM.render(React.createElement(App), reactRoot)
+ReactDOM.render(<Provider store={store}>
+  <App />
+  </Provider>, reactRoot)
