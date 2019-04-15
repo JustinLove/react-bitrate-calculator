@@ -158,9 +158,9 @@ export class ChatBot extends React.Component {
     if (this.state.addr) {
       return this.connectedStatus()
     } else if (this.props.oauthToken) {
-      this.defaultStatus()
+      return this.defaultStatus()
     } else {
-      this.loginLink()
+      return this.loginLink()
     }
   }
 
