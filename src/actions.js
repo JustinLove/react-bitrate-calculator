@@ -30,6 +30,13 @@ export const setBpp = bpp => ({
   },
 })
 
+export const setBpi = bpi => ({
+  type: Act.SET_BPI,
+  payload: {
+    bpi: bpi,
+  },
+})
+
 export const setTarget = target => ({
   type: Act.SET_TARGET,
   payload: {

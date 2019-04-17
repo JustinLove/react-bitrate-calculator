@@ -6,10 +6,11 @@ import * as ChatBot from './ChatBot.js'
 
 const optimize = function(state) {
   switch (state.target) {
-    case 'bitrate': return {bitrate: Calc.calculateBitrate(state)}
-    case 'resolution': return {resolution: Calc.calculateResolution(state)}
-    case 'framerate': return {framerate: Calc.calculateFramerate(state)}
-    case 'bpp': return {bpp: Calc.calculateBpp(state)}
+    case 'bitrate': return {bitrate: Calc.calculateBitrate(state), bpi: Calc.calculateBpi(state)}
+    case 'resolution': return {resolution: Calc.calculateResolution(state), bpi: Calc.calculateBpi(state)}
+    case 'framerate': return {framerate: Calc.calculateFramerate(state), bpi: Calc.calculateBpi(state)}
+    case 'bpp': return {bpp: Calc.calculateBpp(state), bpi: Calc.calculateBpi(state)}
+    case 'bpi': return {bpp: Calc.calculateBpp(state), bpi: Calc.calculateBpi(state)}
     default: console.warn('unknown optimize target'); return {}
   }
 }
@@ -33,6 +34,7 @@ let initialState = {
   }
 }
 initialState.calculator.bpp = Calc.calculateBpp(initialState.calculator)
+initialState.calculator.bpi = Calc.calculateBpi(initialState.calculator)
 
 function update(state = initialState, action) {
   //console.log(state, action)
@@ -41,6 +43,7 @@ function update(state = initialState, action) {
     case Act.SET_RESOLUTION:
     case Act.SET_FRAMERATE:
     case Act.SET_BPP:
+    case Act.SET_BPI:
     case Act.SET_TARGET:
     case Act.SET_SETTINGS:
       return Object.assign({}, state, {calculator: calculate(state.calculator, action)})

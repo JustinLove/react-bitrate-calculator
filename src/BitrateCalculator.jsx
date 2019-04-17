@@ -4,6 +4,7 @@ import {BitrateControl} from './BitrateControl.js'
 import {ResolutionControl} from './ResolutionControl.js'
 import {FramerateControl} from './FramerateControl.js'
 import {BppControl} from './BppControl.js'
+import {BpiControl} from './BpiControl.js'
 
 'use strict'
 
@@ -26,6 +27,10 @@ class BitrateCalculator extends React.Component {
 
   changedBpp(bpp) {
     this.props.setBpp(bpp)
+  }
+
+  changedBpi(bpi) {
+    this.props.setBpi(bpi)
   }
 
   changedTarget(e) {
@@ -87,6 +92,15 @@ class BitrateCalculator extends React.Component {
               className='target-control'
               >
           </BppControl>
+        </div>
+        <div>
+          <BpiControl
+              value={this.props.bpi}
+              onChange={this.changedBpi.bind(this)}
+              disabled={true}
+              className='target-control'
+              >
+          </BpiControl>
         </div>
       </form>
     </div>
