@@ -1,5 +1,6 @@
 import {BitrateCalculator} from "./BitrateCalculator.js"
 import {ChatStatus} from "./ChatStatus.js"
+import * as ChatBot from "./ChatBot.js"
 import {store} from './store.js'
 
 'use strict'
@@ -7,23 +8,17 @@ import {store} from './store.js'
 export class App extends React.Component {
   constructor(props) {
     super(props)
-    let match = window.location.hash.match(/access_token=([^&]+)&/)
-    this.state = {
-      oauthToken: match && match[1],
-    }
   }
 
   render() {
     return <div>
       <BitrateCalculator />
-      <ChatStatus
-        username="wondibot"
-        oauthToken={this.state.oauthToken}
-        channel="wondible"
-      />
+      <ChatStatus />
     </div>
   }
 }
+
+ChatBot.connectToChat(store.getState().chatbot, store)
 
 let Provider = ReactRedux.Provider
 

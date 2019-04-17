@@ -1,5 +1,6 @@
 import * as Calc from './Calculator.js'
 import * as Act from './actionTypes.js'
+import * as ChatBot from './ChatBot.js'
 
 'use strict'
 
@@ -13,6 +14,8 @@ const optimize = function(state) {
   }
 }
 
+let match = window.location.hash.match(/access_token=([^&]+)&/)
+
 let initialState = {
   calculator: {
     bitrate: 2500,
@@ -20,6 +23,14 @@ let initialState = {
     framerate: 30,
     target: 'bpp',
   },
+  chatbot: {
+    username: 'wondibot',
+    oauthToken: match && match[1],
+    channel: 'wondible',
+    client: null,
+    addr: null,
+    port: null,
+  }
 }
 initialState.calculator.bpp = Calc.calculateBpp(initialState.calculator)
 
@@ -33,6 +44,16 @@ function update(state = initialState, action) {
     case Act.SET_TARGET:
     case Act.SET_SETTINGS:
       return Object.assign({}, state, {calculator: calculate(state.calculator, action)})
+    case Act.CHAT_CREATED:
+      return Object.assign({}, state,
+        {chatbot: Object.assign({}, state.chatbot, {client: action.payload.client})})
+    case Act.CHAT_MESSAGE:
+      return {...state, calculator: ChatBot.onChatMessage(state.chatbot, state.calculator, action.payload)}
+    case Act.CHAT_CONNECTED:
+      return Object.assign({}, state, {chatbot: Object.assign({}, state.chatbot, action.payload)})
+    case Act.REPORT_CURRENT_SETTINGS:
+      ChatBot.reportCurrentSettings(state.chatbot, state.calculator)
+      return state
     default:
       return state
   }
@@ -43,4 +64,5 @@ function calculate(state = initialState.calculator, action) {
   return Object.assign(c2, optimize(c2))
 }
 
-export let store = Redux.createStore(update)
+export let store = Redux.createStore(update,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
