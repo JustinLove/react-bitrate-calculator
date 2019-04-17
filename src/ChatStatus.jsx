@@ -4,7 +4,7 @@ import * as actions from './actions.js'
 
 'use strict'
 
-class ChatBot extends React.Component {
+class ChatStatus extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -174,7 +174,7 @@ class ChatBot extends React.Component {
 
   render() {
     return <div>
-      <h2>ChatBot</h2>
+      <h2>Chat Status</h2>
       {this.statusText()}
     </div>
   }
@@ -189,5 +189,5 @@ const {setSettings} = actions;
 const cb = ReactRedux.connect(
   mapStateToProps,
   {setSettings}
-)(ChatBot)
-export {cb as ChatBot}
+)(ChatStatus)
+export {cb as ChatStatus}
