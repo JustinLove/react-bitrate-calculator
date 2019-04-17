@@ -4,17 +4,12 @@ import {BitrateControl} from './BitrateControl.js'
 import {ResolutionControl} from './ResolutionControl.js'
 import {FramerateControl} from './FramerateControl.js'
 import {BppControl} from './BppControl.js'
-import {ChatBot} from './ChatBot.js'
 
 'use strict'
 
 class BitrateCalculator extends React.Component {
   constructor(props) {
     super(props)
-  }
-
-  changedSettings(settings) {
-    this.props.setSettings(settings)
   }
 
   changedBitrate(bitrate) {
@@ -94,16 +89,6 @@ class BitrateCalculator extends React.Component {
           </BppControl>
         </div>
       </form>
-      <ChatBot
-        username={this.props.username}
-        oauthToken={this.props.oauthToken}
-        channel={this.props.channel}
-        onChangeSettings={this.changedSettings.bind(this)}
-        bitrate={this.props.bitrate}
-        resolution={this.props.resolution}
-        framerate={this.props.framerate}
-        bpp={this.props.bpp}
-      />
     </div>
   }
 }

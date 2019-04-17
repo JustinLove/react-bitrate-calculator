@@ -1,9 +1,10 @@
 import {clientId} from "./TwitchId.js"
 import * as Calc from "./Calculator.js"
+import * as actions from './actions.js'
 
 'use strict'
 
-export class ChatBot extends React.Component {
+class ChatBot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -136,7 +137,7 @@ export class ChatBot extends React.Component {
         this.client.say(target, `${Calc.calculateBpp(settings).toFixed(3)} bpp`)
       }
 
-      this.props.onChangeSettings(settings)
+      this.props.setSettings(settings)
     } else {
       //console.log('unknown command')
     }
@@ -178,3 +179,15 @@ export class ChatBot extends React.Component {
     </div>
   }
 }
+
+const mapStateToProps = state => {
+  return state
+}
+
+const {setSettings} = actions;
+
+const cb = ReactRedux.connect(
+  mapStateToProps,
+  {setSettings}
+)(ChatBot)
+export {cb as ChatBot}
