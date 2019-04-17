@@ -181,7 +181,7 @@ class ChatBot extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return state
+  return state.calculator
 }
 
 const {setSettings} = actions;

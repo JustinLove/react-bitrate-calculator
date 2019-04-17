@@ -14,12 +14,14 @@ const optimize = function(state) {
 }
 
 let initialState = {
-  bitrate: 2500,
-  resolution: Calc.resolutionOptions[0],
-  framerate: 30,
-  target: 'bpp',
+  calculator: {
+    bitrate: 2500,
+    resolution: Calc.resolutionOptions[0],
+    framerate: 30,
+    target: 'bpp',
+  },
 }
-initialState.bpp = Calc.calculateBpp(initialState)
+initialState.calculator.bpp = Calc.calculateBpp(initialState.calculator)
 
 function update(state = initialState, action) {
   //console.log(state, action)
@@ -30,11 +32,15 @@ function update(state = initialState, action) {
     case Act.SET_BPP:
     case Act.SET_TARGET:
     case Act.SET_SETTINGS:
-      let s2 = Object.assign({}, state, action.payload)
-      return Object.assign(s2, optimize(s2))
+      return Object.assign({}, state, {calculator: calculate(state.calculator, action)})
     default:
       return state
   }
+}
+
+function calculate(state = initialState.calculator, action) {
+  let c2 = Object.assign({}, state, action.payload)
+  return Object.assign(c2, optimize(c2))
 }
 
 export let store = Redux.createStore(update)
