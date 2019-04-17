@@ -29,6 +29,7 @@ function update(state = initialState, action) {
     case Act.SET_FRAMERATE:
     case Act.SET_BPP:
     case Act.SET_TARGET:
+    case Act.SET_SETTINGS:
       let s2 = Object.assign({}, state, action.payload)
       return Object.assign(s2, optimize(s2))
     default:

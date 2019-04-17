@@ -36,3 +36,8 @@ export const setTarget = target => ({
     target: target,
   },
 })
+
+export const setSettings = settings => ({
+  type: Act.SET_SETTINGS,
+  payload: settings,
+})

@@ -13,7 +13,9 @@ class BitrateCalculator extends React.Component {
     super(props)
   }
 
-  changedSettings(settings) {}
+  changedSettings(settings) {
+    this.props.setSettings(settings)
+  }
 
   changedBitrate(bitrate) {
     this.props.setBitrate(bitrate)
@@ -97,13 +99,9 @@ class BitrateCalculator extends React.Component {
         oauthToken={this.props.oauthToken}
         channel={this.props.channel}
         onChangeSettings={this.changedSettings.bind(this)}
-        onChangeTarget={this.changedTarget.bind(this)}
         bitrate={this.props.bitrate}
-        onChangeBitrate={this.changedBitrate.bind(this)}
         resolution={this.props.resolution}
-        onChangeResolution={this.changedResolution.bind(this)}
         framerate={this.props.framerate}
-        onChangeFramerate={this.changedFramerate.bind(this)}
         bpp={this.props.bpp}
       />
     </div>
