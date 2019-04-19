@@ -1,9 +1,9 @@
-import {App} from "./App.js"
+import {App} from "./App.jsx"
 import * as ChatBot from "./ChatBot.js"
 import {store} from './store.js'
-import * as React from './react.js'
-import * as ReactRedux from './react-redux.js'
-import * as ReactDOM from './react-dom.js'
+import * as React from 'react'
+import * as ReactRedux from 'react-redux'
+import * as ReactDOM from 'react-dom'
 
 'use strict'
 

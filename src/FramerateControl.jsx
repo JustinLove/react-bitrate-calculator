@@ -1,5 +1,5 @@
 import {framerateOptions} from './Calculator.js'
-import * as React from './react.js'
+import * as React from 'react'
 
 'use strict'
 

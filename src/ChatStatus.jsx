@@ -2,8 +2,8 @@ import {clientId} from "./TwitchId.js"
 import * as Calc from "./Calculator.js"
 import * as actions from './actions.js'
 import * as ChatBot from './ChatBot.js'
-import * as ReactRedux from './react-redux.js'
-import * as React from './react.js'
+import * as ReactRedux from 'react-redux'
+import * as React from 'react'
 
 'use strict'
 

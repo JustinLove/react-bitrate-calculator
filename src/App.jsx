@@ -1,6 +1,6 @@
-import {BitrateCalculator} from "./BitrateCalculator.js"
-import {ChatStatus} from "./ChatStatus.js"
-import * as React from './react.js'
+import {BitrateCalculator} from "./BitrateCalculator.jsx"
+import {ChatStatus} from "./ChatStatus.jsx"
+import * as React from 'react'
 
 'use strict'
 
