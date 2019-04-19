@@ -2,6 +2,9 @@ import {BitrateCalculator} from "./BitrateCalculator.js"
 import {ChatStatus} from "./ChatStatus.js"
 import * as ChatBot from "./ChatBot.js"
 import {store} from './store.js'
+import * as ReactRedux from './react-redux.js'
+import * as React from './react.js'
+import * as ReactDOM from './react-dom.js'
 
 'use strict'
 

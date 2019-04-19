@@ -1,6 +1,7 @@
 import {clientId} from "./TwitchId.js"
 import * as Calc from "./Calculator.js"
 import * as actions from './actions.js'
+import './tmi.js'
 
 'use strict'
 

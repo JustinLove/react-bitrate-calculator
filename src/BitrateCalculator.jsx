@@ -5,6 +5,8 @@ import {ResolutionControl} from './ResolutionControl.js'
 import {FramerateControl} from './FramerateControl.js'
 import {BppControl} from './BppControl.js'
 import {BpiControl} from './BpiControl.js'
+import * as ReactRedux from './react-redux.js'
+import * as React from './react.js'
 
 'use strict'
 

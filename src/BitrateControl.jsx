@@ -1,3 +1,5 @@
+import * as React from './react.js'
+
 'use strict'
 
 export class BitrateControl extends React.Component {

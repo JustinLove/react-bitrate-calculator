@@ -1,6 +1,7 @@
 import * as Calc from './Calculator.js'
 import * as Act from './actionTypes.js'
 import * as ChatBot from './ChatBot.js'
+import * as Redux from './redux.js'
 
 'use strict'
 
