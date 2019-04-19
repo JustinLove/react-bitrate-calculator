@@ -1,2 +1,2 @@
 #!/bin/sh
-npx webpack --watch
+npx webpack-dev-server

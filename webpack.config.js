@@ -20,10 +20,13 @@ module.exports = {
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
-    modules: ['lib'],
+    modules: ['lib', 'node_modules'],
   },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'public')
-  }
+  },
+  devServer: {
+    contentBase: './public',
+  },
 }
