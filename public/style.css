@@ -9,11 +9,12 @@ input[type="range"] { vertical-align: bottom; }
 label.dimension {
   display: inline-block;
   width: 5em;
+  text-align: right;
 }
 
 .data {
   display: inline-block;
-  width: 8em;
+  width: 6em;
 }
 
 .data input, .data select {
