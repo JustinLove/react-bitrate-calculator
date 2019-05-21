@@ -26,7 +26,7 @@ export class BpiControl extends React.Component {
           type='number'
           id='bpi'
           name='bpi'
-          value={this.props.value}
+          value={this.props.value.toFixed(1)}
           onChange={this.changedBpi.bind(this)}
           disabled={this.props.disabled}
           >
