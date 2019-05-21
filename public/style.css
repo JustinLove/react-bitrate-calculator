@@ -20,7 +20,7 @@ label.dimension {
   width: 8em;
 }
 
-label.min, label.max {
+.min, .max {
   display: inline-block;
   width: 2em;
 }

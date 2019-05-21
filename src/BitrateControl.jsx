@@ -28,6 +28,7 @@ export class BitrateControl extends React.Component {
         min='0'
         max='6000'
         step='1'
+        labels="true"
         value={this.props.value/1000}
         onChange={this.changedBitrate.bind(this)}
         disabled={this.props.disabled}

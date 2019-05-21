@@ -37,6 +37,7 @@ export class BppControl extends React.Component {
         min='0.05'
         max='0.5'
         step='0.01'
+        labels="true"
         value={this.state.stringValue}
         onChange={this.changedStringValue.bind(this)}
         disabled={this.props.disabled}

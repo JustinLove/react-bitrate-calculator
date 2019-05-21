@@ -14,7 +14,9 @@ export class DimensionControl extends React.Component {
           {this.props.children}
         </div>
         {' '}
-        <label className="min">{this.props.min}</label>
+        {this.props.labels ?
+          <label className="min">{this.props.min}</label> :
+          <span className="min"></span>}
         {' '}
         <input
           type='range'
@@ -29,7 +31,7 @@ export class DimensionControl extends React.Component {
           >
         </input>
         {' '}
-        <label className="max">{this.props.max}</label>
+        {this.props.labels ? <label className="max">{this.props.max}</label> : ""}
       </div>
   }
 }

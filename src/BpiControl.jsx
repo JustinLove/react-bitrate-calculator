@@ -28,6 +28,7 @@ export class BpiControl extends React.Component {
         min='0'
         max='20'
         step='1'
+        labels="true"
         value={this.props.value}
         onChange={this.changedBpi.bind(this)}
         disabled={this.props.disabled}
