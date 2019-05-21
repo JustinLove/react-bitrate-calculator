@@ -43,28 +43,28 @@ const theaterSize = monitorSize * theaterRes.diagonal / resolutionOptions[resolu
 
 console.log(theaterSize)
 export const calculateBitrate = function({resolution: {w, h}, framerate, bpp, bpi}) {
-  return w * h * framerate * bpp / 1000
+  return w * h * framerate * bpp
 }
 
 export const calculateResolution = function({bitrate, framerate, bpp}) {
-  let targetPps = bitrate * 1000 / bpp
+  let targetPps = bitrate / bpp
   return videoOptions
     .filter(({framerate: fps}) => fps == framerate)
     .sort((a, b) => Math.abs(targetPps - a.pps) - Math.abs(targetPps - b.pps))[0].resolution
 }
 
 export const calculateFramerate = function({bitrate, resolution, bpp}) {
-  let targetPps = bitrate * 1000 / bpp
+  let targetPps = bitrate / bpp
   return videoOptions
     .filter(({resolution: res}) => res == resolution)
     .sort((a, b) => Math.abs(targetPps - a.pps) - Math.abs(targetPps - b.pps))[0].framerate
 }
 
 export const calculateBpp = function({bitrate, resolution: {w, h}, framerate}) {
-  return bitrate * 1000 / (w * h * framerate)
+  return bitrate / (w * h * framerate)
 }
 
 export const calculateBpi = function({bitrate, resolution: {w, h, diagonal}, framerate}) {
   console.log(diagonal/theaterSize)
-  return (bitrate * 1000 / (w * h * framerate)) * (diagonal / theaterSize)
+  return (bitrate / (w * h * framerate)) * (diagonal / theaterSize)
 }

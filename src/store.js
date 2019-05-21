@@ -19,7 +19,7 @@ let match = window.location.hash.match(/access_token=([^&]+)&/)
 
 let initialState = {
   calculator: {
-    bitrate: 2500,
+    bitrate: 2500000,
     resolution: Calc.resolutionOptions[0],
     framerate: 30,
     target: 'bpp',
