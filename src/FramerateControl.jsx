@@ -26,9 +26,10 @@ export class FramerateControl extends React.Component {
 
   render() {
     return <div className={this.props.className}>
-      <label htmlFor='framerate'>Framerate</label>{' '}
+      <label className='dimension' htmlFor='framerate'>Framerate</label>{' '}
       <select
         id='framerate'
+        className='data'
         name='framerate'
         value={this.props.value}
         onChange={this.changedFramerate.bind(this)}

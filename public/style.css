@@ -1,2 +1,16 @@
 input[type="range"] { vertical-align: bottom; }
 .target-control { display: inline-block; }
+
+.target-select {
+  display: inline-block;
+  width: 2em;
+}
+
+label.dimension {
+  display: inline-block;
+  width: 5em;
+}
+
+.data {
+  width: 8em;
+}

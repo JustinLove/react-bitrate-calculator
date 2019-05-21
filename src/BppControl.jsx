@@ -30,10 +30,11 @@ export class BppControl extends React.Component {
 
   render() {
     return <div className={this.props.className}>
-      <label htmlFor='bpp'>BPP</label>{' '}
+      <label className='dimension' htmlFor='bpp'>BPP</label>{' '}
       <input
         type='text'
         id='bpp'
+        className='data'
         name='bpp'
         value={this.state.stringValue}
         onChange={this.changedStringValue.bind(this)}

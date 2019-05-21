@@ -21,10 +21,11 @@ export class BitrateControl extends React.Component {
 
   render() {
     return <div className={this.props.className}>
-        <label htmlFor='bitrate'>Bitrate</label>{' '}
+        <label className="dimension" htmlFor='bitrate'>Bitrate</label>{' '}
         <input
           type='number'
           id='bitrate'
+          className='data'
           name='bitrate'
           value={this.props.value/1000}
           onChange={this.changedBitrate.bind(this)}

@@ -40,15 +40,18 @@ class BitrateCalculator extends React.Component {
   }
 
   radio(target) {
-    return <input
-      type='radio'
-      name='target'
-      id={'target-' + target}
-      value={target}
-      checked={this.props.target == target}
-      onChange={this.changedTarget.bind(this)}
-      >
-    </input>
+    return <span className='target-select'>
+      <input
+        type='radio'
+        name='target'
+        id={'target-' + target}
+        className='target-select'
+        value={target}
+        checked={this.props.target == target}
+        onChange={this.changedTarget.bind(this)}
+        >
+      </input>
+    </span>
   }
 
   render() {
@@ -96,6 +99,7 @@ class BitrateCalculator extends React.Component {
           </BppControl>
         </div>
         <div>
+          <span className="target-select"></span>
           <BpiControl
               value={this.props.bpi}
               onChange={this.changedBpi.bind(this)}

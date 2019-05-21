@@ -21,9 +21,10 @@ export class ResolutionControl extends React.Component {
 
   render() {
     return <div className={this.props.className}>
-      <label htmlFor='resolution'>Resolution</label>{' '}
+      <label className='dimension' htmlFor='resolution'>Resolution</label>{' '}
       <select
         id='resolution'
+        className='data'
         name='resolution'
         value={this.props.value.value}
         onChange={this.changedResolution.bind(this)}

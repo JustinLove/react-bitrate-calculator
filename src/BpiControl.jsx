@@ -21,10 +21,11 @@ export class BpiControl extends React.Component {
 
   render() {
     return <div className={this.props.className}>
-        <label htmlFor='bpi'>BPI</label>{' '}
+        <label className='dimension' htmlFor='bpi'>BPI</label>{' '}
         <input
           type='number'
           id='bpi'
+          className='data'
           name='bpi'
           value={this.props.value.toFixed(1)}
           onChange={this.changedBpi.bind(this)}
