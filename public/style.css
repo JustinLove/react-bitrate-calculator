@@ -12,5 +12,15 @@ label.dimension {
 }
 
 .data {
+  display: inline-block;
   width: 8em;
+}
+
+.data input, .data select {
+  width: 8em;
+}
+
+label.min, label.max {
+  display: inline-block;
+  width: 2em;
 }

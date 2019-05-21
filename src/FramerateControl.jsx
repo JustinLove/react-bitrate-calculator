@@ -1,4 +1,5 @@
 import {framerateOptions} from './Calculator.js'
+import {DimensionControl} from './DimensionControl.jsx'
 import * as React from 'react'
 
 'use strict'
@@ -25,25 +26,10 @@ export class FramerateControl extends React.Component {
   }
 
   render() {
-    return <div className={this.props.className}>
-      <label className='dimension' htmlFor='framerate'>Framerate</label>{' '}
-      <select
-        id='framerate'
-        className='data'
-        name='framerate'
-        value={this.props.value}
-        onChange={this.changedFramerate.bind(this)}
-        disabled={this.props.disabled}
-        >
-        {framerateOptions.map(fps =>
-          <option value={fps} key={fps.toString()}>{fps}</option>
-        )}
-      </select>
-      {' '}
-      <input
-        type='range'
-        id='framerate-slider'
-        name='framerate-slider'
+    return <DimensionControl
+        className={this.props.className}
+        dimension='framerate'
+        dimensionName='Framerate'
         min={0}
         max={framerateOptions.length-1}
         step='1'
@@ -51,7 +37,17 @@ export class FramerateControl extends React.Component {
         onChange={this.changedSlider.bind(this)}
         disabled={this.props.disabled}
         >
-      </input>
-    </div>
+        <select
+          id='framerate'
+          name='framerate'
+          value={this.props.value}
+          onChange={this.changedFramerate.bind(this)}
+          disabled={this.props.disabled}
+          >
+          {framerateOptions.map(fps =>
+            <option value={fps} key={fps.toString()}>{fps}</option>
+          )}
+        </select>
+      </DimensionControl>
   }
 }

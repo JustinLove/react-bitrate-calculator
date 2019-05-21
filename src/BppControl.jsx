@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {DimensionControl} from './DimensionControl.jsx'
 
 'use strict'
 
@@ -29,25 +30,10 @@ export class BppControl extends React.Component {
   }
 
   render() {
-    return <div className={this.props.className}>
-      <label className='dimension' htmlFor='bpp'>BPP</label>{' '}
-      <input
-        type='text'
-        id='bpp'
-        className='data'
-        name='bpp'
-        value={this.state.stringValue}
-        onChange={this.changedStringValue.bind(this)}
-        disabled={this.props.disabled}
-        >
-      </input>
-      {' '}
-      <label>0.05</label>
-      {' '}
-      <input
-        type='range'
-        id='bpp-slider'
-        name='bpp-slider'
+    return <DimensionControl
+        className={this.props.className}
+        dimension='bpp'
+        dimensionName='BPP'
         min='0.05'
         max='0.5'
         step='0.01'
@@ -55,9 +41,15 @@ export class BppControl extends React.Component {
         onChange={this.changedStringValue.bind(this)}
         disabled={this.props.disabled}
         >
-      </input>
-      {' '}
-      <label>0.5</label>
-    </div>
+        <input
+          type='text'
+          id='bpp'
+          name='bpp'
+          value={this.state.stringValue}
+          onChange={this.changedStringValue.bind(this)}
+          disabled={this.props.disabled}
+          >
+        </input>
+      </DimensionControl>
   }
 }

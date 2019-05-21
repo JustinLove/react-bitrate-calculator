@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {DimensionControl} from './DimensionControl.jsx'
 
 'use strict'
 
@@ -20,34 +21,26 @@ export class BpiControl extends React.Component {
   }
 
   render() {
-    return <div className={this.props.className}>
-        <label className='dimension' htmlFor='bpi'>BPI</label>{' '}
+    return <DimensionControl
+        className={this.props.className}
+        dimension='bpi'
+        dimensionName='BPI'
+        min='0'
+        max='20'
+        step='1'
+        value={this.props.value}
+        onChange={this.changedBpi.bind(this)}
+        disabled={this.props.disabled}
+        >
         <input
           type='number'
           id='bpi'
-          className='data'
           name='bpi'
           value={this.props.value.toFixed(1)}
           onChange={this.changedBpi.bind(this)}
           disabled={this.props.disabled}
           >
         </input>
-        {' '}
-        <label>0</label>
-        {' '}
-        <input
-          type='range'
-          id='bpi-slider'
-          name='bpi-slider'
-          max='20'
-          step='1'
-          value={this.props.value}
-          onChange={this.changedBpi.bind(this)}
-          disabled={this.props.disabled}
-          >
-        </input>
-        {' '}
-        <label>20</label>
-      </div>
+      </DimensionControl>
   }
 }

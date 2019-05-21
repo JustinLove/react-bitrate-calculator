@@ -1,4 +1,5 @@
 import {resolutionOptions} from './Calculator.js'
+import {DimensionControl} from './DimensionControl.jsx'
 import * as React from 'react'
 
 'use strict'
@@ -20,25 +21,10 @@ export class ResolutionControl extends React.Component {
   }
 
   render() {
-    return <div className={this.props.className}>
-      <label className='dimension' htmlFor='resolution'>Resolution</label>{' '}
-      <select
-        id='resolution'
-        className='data'
-        name='resolution'
-        value={this.props.value.value}
-        onChange={this.changedResolution.bind(this)}
-        disabled={this.props.disabled}
-        >
-        {resolutionOptions.map(res =>
-          <option value={res.value} key={res.value}>{res.value}</option>
-        )}
-      </select>
-      {' '}
-      <input
-        type='range'
-        id='resolution-slider'
-        name='resolution-slider'
+    return <DimensionControl
+        className={this.props.className}
+        dimension='resolution'
+        dimensionName='Resolution'
         min={0}
         max={resolutionOptions.length-1}
         step='1'
@@ -46,7 +32,17 @@ export class ResolutionControl extends React.Component {
         onChange={this.changedSlider.bind(this)}
         disabled={this.props.disabled}
         >
-      </input>
-    </div>
+        <select
+          id='resolution'
+          name='resolution'
+          value={this.props.value.value}
+          onChange={this.changedResolution.bind(this)}
+          disabled={this.props.disabled}
+          >
+          {resolutionOptions.map(res =>
+            <option value={res.value} key={res.value}>{res.value}</option>
+          )}
+        </select>
+      </DimensionControl>
   }
 }

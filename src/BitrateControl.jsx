@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {DimensionControl} from './DimensionControl.jsx'
 
 'use strict'
 
@@ -20,34 +21,26 @@ export class BitrateControl extends React.Component {
   }
 
   render() {
-    return <div className={this.props.className}>
-        <label className="dimension" htmlFor='bitrate'>Bitrate</label>{' '}
+    return <DimensionControl
+        className={this.props.className}
+        dimension='bitrate'
+        dimensionName='Bitrate'
+        min='0'
+        max='6000'
+        step='1'
+        value={this.props.value/1000}
+        onChange={this.changedBitrate.bind(this)}
+        disabled={this.props.disabled}
+        >
         <input
           type='number'
           id='bitrate'
-          className='data'
           name='bitrate'
           value={this.props.value/1000}
           onChange={this.changedBitrate.bind(this)}
           disabled={this.props.disabled}
           >
         </input>
-        {' '}
-        <label>0</label>
-        {' '}
-        <input
-          type='range'
-          id='bitrate-slider'
-          name='bitrate-slider'
-          max='6000'
-          step='1'
-          value={this.props.value/1000}
-          onChange={this.changedBitrate.bind(this)}
-          disabled={this.props.disabled}
-          >
-        </input>
-        {' '}
-        <label>6000</label>
-      </div>
+      </DimensionControl>
   }
 }
