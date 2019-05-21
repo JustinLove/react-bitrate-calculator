@@ -48,33 +48,3 @@ export const setSettings = settings => ({
   type: Act.SET_SETTINGS,
   payload: settings,
 })
-
-export const chatCreated = client => ({
-  type: Act.CHAT_CREATED,
-  payload: {
-    client,
-  },
-})
-
-
-export const chatMessage = (target, context, msg, self) => ({
-  type: Act.CHAT_MESSAGE,
-  payload: {
-    target,
-    context,
-    msg,
-    self,
-  },
-})
-
-export const chatConnected = (addr, port) => ({
-  type: Act.CHAT_CONNECTED,
-  payload: {
-    addr,
-    port,
-  },
-})
-
-export const reportCurrentSettings = () => ({
-  type: Act.REPORT_CURRENT_SETTINGS,
-})

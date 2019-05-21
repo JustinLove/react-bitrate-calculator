@@ -1,6 +1,5 @@
 import * as Calc from './Calculator.js'
 import * as Act from './actionTypes.js'
-import * as ChatBot from './ChatBot.js'
 import * as Redux from 'redux'
 
 'use strict'
@@ -24,14 +23,6 @@ let initialState = {
     resolution: Calc.resolutionOptions[0],
     framerate: 30,
     target: 'bpp',
-  },
-  chatbot: {
-    username: 'wondibot',
-    oauthToken: match && match[1],
-    channel: 'wondible',
-    client: null,
-    addr: null,
-    port: null,
   }
 }
 initialState.calculator.bpp = Calc.calculateBpp(initialState.calculator)
@@ -48,16 +39,6 @@ function update(state = initialState, action) {
     case Act.SET_TARGET:
     case Act.SET_SETTINGS:
       return Object.assign({}, state, {calculator: calculate(state.calculator, action)})
-    case Act.CHAT_CREATED:
-      return Object.assign({}, state,
-        {chatbot: Object.assign({}, state.chatbot, {client: action.payload.client})})
-    case Act.CHAT_MESSAGE:
-      return {...state, calculator: ChatBot.onChatMessage(state.chatbot, state.calculator, action.payload)}
-    case Act.CHAT_CONNECTED:
-      return Object.assign({}, state, {chatbot: Object.assign({}, state.chatbot, action.payload)})
-    case Act.REPORT_CURRENT_SETTINGS:
-      ChatBot.reportCurrentSettings(state.chatbot, state.calculator)
-      return state
     default:
       return state
   }
