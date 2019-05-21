@@ -22,6 +22,7 @@ let initialState = {
     bitrate: 2500000,
     resolution: Calc.resolutionOptions[0],
     framerate: 30,
+    monitor: 22,
     target: 'bpp',
   }
 }
@@ -36,6 +37,7 @@ function update(state = initialState, action) {
     case Act.SET_FRAMERATE:
     case Act.SET_BPP:
     case Act.SET_BPI:
+    case Act.SET_MONITOR:
     case Act.SET_TARGET:
     case Act.SET_SETTINGS:
       return Object.assign({}, state, {calculator: calculate(state.calculator, action)})

@@ -37,6 +37,13 @@ export const setBpi = bpi => ({
   },
 })
 
+export const setMonitor = monitor => ({
+  type: Act.SET_MONITOR,
+  payload: {
+    monitor: monitor,
+  },
+})
+
 export const setTarget = target => ({
   type: Act.SET_TARGET,
   payload: {

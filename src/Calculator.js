@@ -36,12 +36,10 @@ const preparePps = function() {
 
 const videoOptions = preparePps()
 
-const monitorSize = 22
 const theaterRes = {w: 1580, h: 904}
 theaterRes.diagonal = Math.sqrt(theaterRes.w*theaterRes.w + theaterRes.h*theaterRes.h)
-const theaterSize = monitorSize * theaterRes.diagonal / resolutionOptions[resolutionOptions.length-1].diagonal
+const theaterScale = theaterRes.diagonal / resolutionOptions[resolutionOptions.length-1].diagonal
 
-console.log(theaterSize)
 export const calculateBitrate = function({resolution: {w, h}, framerate, bpp, bpi}) {
   return w * h * framerate * bpp
 }
@@ -64,7 +62,6 @@ export const calculateBpp = function({bitrate, resolution: {w, h}, framerate}) {
   return bitrate / (w * h * framerate)
 }
 
-export const calculateBpi = function({bitrate, resolution: {w, h, diagonal}, framerate}) {
-  console.log(diagonal/theaterSize)
-  return (bitrate / (w * h * framerate)) * (diagonal / theaterSize)
+export const calculateBpi = function({bitrate, resolution: {w, h, diagonal}, framerate, monitor}) {
+  return (bitrate / (w * h * framerate)) * (diagonal / (monitor * theaterScale))
 }

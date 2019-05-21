@@ -5,6 +5,7 @@ import {ResolutionControl} from './ResolutionControl.jsx'
 import {FramerateControl} from './FramerateControl.jsx'
 import {BppControl} from './BppControl.jsx'
 import {BpiControl} from './BpiControl.jsx'
+import {MonitorControl} from './MonitorControl.jsx'
 import * as ReactRedux from 'react-redux'
 import * as React from 'react'
 
@@ -33,6 +34,10 @@ class BitrateCalculator extends React.Component {
 
   changedBpi(bpi) {
     this.props.setBpi(bpi)
+  }
+
+  changedMonitor(monitor) {
+    this.props.setMonitor(monitor)
   }
 
   changedTarget(e) {
@@ -107,6 +112,15 @@ class BitrateCalculator extends React.Component {
               className='target-control'
               >
           </BpiControl>
+        </div>
+        <div>
+          <span className="target-select"></span>
+          <MonitorControl
+              value={this.props.monitor}
+              onChange={this.changedMonitor.bind(this)}
+              className='target-control'
+              >
+          </MonitorControl>
         </div>
       </form>
     </div>
